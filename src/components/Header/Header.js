@@ -10,6 +10,7 @@ import {
 import Icon from '../Icon';
 import Logo from '../Logo';
 import MobileMenu from '../MobileMenu';
+import { NavLink } from '../Nav/Nav';
 import SuperHeader from '../SuperHeader';
 import UnstyledButton from '../UnstyledButton';
 import VisuallyHidden from '../VisuallyHidden';
@@ -31,20 +32,20 @@ const Header = () => {
         </Side>
 
         <DesktopNav>
-          <NavLink href="/sale">Sale</NavLink>
-          <NavLink href="/new">New&nbsp;Releases</NavLink>
-          <NavLink href="/men">Men</NavLink>
-          <NavLink href="/women">Women</NavLink>
-          <NavLink href="/kids">Kids</NavLink>
-          <NavLink href="/collections">Collections</NavLink>
+          <DesktopNavLink href="/sale">Sale</DesktopNavLink>
+          <DesktopNavLink href="/new">New&nbsp;Releases</DesktopNavLink>
+          <DesktopNavLink href="/men">Men</DesktopNavLink>
+          <DesktopNavLink href="/women">Women</DesktopNavLink>
+          <DesktopNavLink href="/kids">Kids</DesktopNavLink>
+          <DesktopNavLink href="/collections">Collections</DesktopNavLink>
         </DesktopNav>
 
         <IconsWrapper>
-          <NavButton onClick={() => setShowMobileMenu(true)}>
+          <NavButton>
             <Icon id={"shopping-bag"} />
             <VisuallyHidden>Open Cart</VisuallyHidden>
           </NavButton>
-          <NavButton onClick={() => setShowMobileMenu(true)}>
+          <NavButton>
             <Icon id={"search"} />
             <VisuallyHidden>Search</VisuallyHidden>
           </NavButton>
@@ -122,7 +123,7 @@ const Side = styled.div`
   }
 `;
 
-const NavLink = styled.a`
+const DesktopNavLink = styled(NavLink)`
   font-size: 1.125rem;
   text-transform: uppercase;
   text-decoration: none;
