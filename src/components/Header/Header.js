@@ -1,10 +1,18 @@
 import React from 'react';
+
 import styled from 'styled-components/macro';
 
-import { COLORS, WEIGHTS } from '../../constants';
+import {
+  COLORS,
+  QUERIES,
+  WEIGHTS,
+} from '../../constants';
+import Icon from '../Icon';
 import Logo from '../Logo';
-import SuperHeader from '../SuperHeader';
 import MobileMenu from '../MobileMenu';
+import SuperHeader from '../SuperHeader';
+import UnstyledButton from '../UnstyledButton';
+import VisuallyHidden from '../VisuallyHidden';
 
 const Header = () => {
   const [showMobileMenu, setShowMobileMenu] = React.useState(false);
@@ -21,14 +29,31 @@ const Header = () => {
         <Side>
           <Logo />
         </Side>
-        <Nav>
+
+        <DesktopNav>
           <NavLink href="/sale">Sale</NavLink>
           <NavLink href="/new">New&nbsp;Releases</NavLink>
           <NavLink href="/men">Men</NavLink>
           <NavLink href="/women">Women</NavLink>
           <NavLink href="/kids">Kids</NavLink>
           <NavLink href="/collections">Collections</NavLink>
-        </Nav>
+        </DesktopNav>
+
+        <IconsWrapper>
+          <NavButton onClick={() => setShowMobileMenu(true)}>
+            <Icon id={"shopping-bag"} />
+            <VisuallyHidden>Open Cart</VisuallyHidden>
+          </NavButton>
+          <NavButton onClick={() => setShowMobileMenu(true)}>
+            <Icon id={"search"} />
+            <VisuallyHidden>Search</VisuallyHidden>
+          </NavButton>
+          <NavButton onClick={() => setShowMobileMenu(true)}>
+            <Icon id={"menu"} />
+            <VisuallyHidden>Menu</VisuallyHidden>
+          </NavButton>
+        </IconsWrapper>
+
         <Side />
       </MainHeader>
 
@@ -46,16 +71,55 @@ const MainHeader = styled.div`
   padding: 18px 32px;
   height: 72px;
   border-bottom: 1px solid ${COLORS.gray[300]};
+
+  @media ${QUERIES.tabletAndSmaller} {
+    border-top: 4px solid ${COLORS.gray[900]};
+    align-items: center;
+    padding-left: 16px;
+    padding-right: 6px;
+  }
 `;
 
-const Nav = styled.nav`
+const NavButton = styled(UnstyledButton)`
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;
+
+const IconsWrapper = styled.div`
+  display: none;
+
+  @media ${QUERIES.tabletAndSmaller} {
+    display: flex;
+    align-items: center;
+    margin-left: auto;
+
+    gap: 12px;
+  }
+
+  @media ${QUERIES.phoneAndSmaller} {
+    gap: 2px;
+  }
+`;
+
+const DesktopNav = styled.nav`
   display: flex;
   gap: 48px;
   margin: 0px 48px;
+
+  @media ${QUERIES.tabletAndSmaller} {
+    display: none;
+  }
 `;
 
 const Side = styled.div`
   flex: 1;
+
+  @media ${QUERIES.tabletAndSmaller} {
+    flex: revert;
+  }
 `;
 
 const NavLink = styled.a`
@@ -67,6 +131,10 @@ const NavLink = styled.a`
 
   &:first-of-type {
     color: ${COLORS.secondary};
+  }
+
+  @media ${QUERIES.tabletAndSmaller} {
+    display: none;
   }
 `;
 
